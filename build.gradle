@@ -27,8 +27,6 @@ repositories { // 각종 의존성(라이브러리)들을 어떤 원격 저장�
 
 dependencies {
     implementation 'org.testng:testng:7.5'
-    implementation 'org.testng:testng:7.5'
-    implementation 'org.testng:testng:7.5'
     implementation 'org.assertj:assertj-core:3.22.0'
 
 // 의존성 선언
@@ -38,7 +36,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-mustache')
     compile('com.h2database:h2')
 
-    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    //compile('org.springframework.boot:spring-boot-starter-oauth2-client')
     compile('org.springframework.session:spring-session-jdbc')
 
     compile("org.mariadb.jdbc:mariadb-java-client")
@@ -46,6 +44,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.springframework.security:spring-security-test")
     testCompile('org.assertj:assertj-core:3.22.0')
+
 }
 
 test {
