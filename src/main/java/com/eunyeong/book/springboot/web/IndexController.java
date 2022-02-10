@@ -54,4 +54,16 @@ public class IndexController {
         map.put("postList", postsService.searchPosts(keyword));
         return map;
     }
+
+    @GetMapping("/auth/google/user/")
+    public @ResponseBody Map<String, Object> userInformation(){
+        Map<String, Object> userInfo = new HashMap<>();
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if(user!=null){
+            userInfo.put("userName", user.getName());
+            userInfo.put("userEmail", user.getEmail());
+            userInfo.put("userPicture", user.getPicture());
+        }
+        return userInfo;
+    }
 }
