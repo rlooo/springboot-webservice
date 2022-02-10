@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,4 +55,11 @@ public class PostsService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<PostsListResponseDto> searchPosts(String keyword) {
+        return postsRepository.findByTitleContaining(keyword).stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
+
