@@ -48,22 +48,22 @@ public class IndexController {
         return "posts-update";
     }
 
-    @GetMapping("/book/search")
-    public @ResponseBody Map<String, Object> search(@RequestParam(value = "keyword") String keyword, Model model) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("postList", postsService.searchPosts(keyword));
-        return map;
-    }
-
-    @GetMapping("/auth/google/user/")
-    public @ResponseBody Map<String, Object> userInformation(){
-        Map<String, Object> userInfo = new HashMap<>();
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        if(user!=null){
-            userInfo.put("userName", user.getName());
-            userInfo.put("userEmail", user.getEmail());
-            userInfo.put("userPicture", user.getPicture());
-        }
-        return userInfo;
-    }
+//    @GetMapping("/book/search")
+//    public @ResponseBody Map<String, Object> search(@RequestParam(value = "keyword") String keyword, Model model) {
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("postList", postsService.searchPosts(keyword));
+//        return map;
+//    }
+//
+//    @GetMapping("/auth/google/user")
+//    public @ResponseBody Map<String, Object> userInformation(){
+//        Map<String, Object> userInfo = new HashMap<>();
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+//        if(user!=null){
+//            userInfo.put("userName", user.getName());
+//            userInfo.put("userEmail", user.getEmail());
+//            userInfo.put("userPicture", user.getPicture());
+//        }
+//        return userInfo;
+//    }
 }
