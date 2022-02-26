@@ -2,11 +2,13 @@ package com.eunyeong.book.springboot.web.dto;
 
 import com.eunyeong.book.springboot.domain.posts.Posts;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@Data
 public class PostsSaveRequestDto {
     private String title;
     private String content;

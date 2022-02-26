@@ -2,6 +2,7 @@ package com.eunyeong.book.springboot.web;
 
 import com.eunyeong.book.springboot.service.books.BooksService;
 import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
+import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
 import com.eunyeong.book.springboot.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -16,8 +17,13 @@ public class BooksApiController {
     private final BooksService booksService;
 
     @PostMapping("/books/save")
-    public Long booksSave(@RequestBody BooksSaveRequestDto requestDto) {
-        return booksService.save(requestDto);
+    public Long booksSave(@RequestBody BooksSaveRequestDto bookRequestDto) {
+        return booksService.save(bookRequestDto);
+    }
+
+    @PostMapping("/collectinfo/save")
+    public Long collectInfoSave(@RequestBody CollectInfoSaveRequestDto collectInfoRequestDto) {
+        return booksService.save(collectInfoRequestDto);
     }
 
     @GetMapping("/book/search")

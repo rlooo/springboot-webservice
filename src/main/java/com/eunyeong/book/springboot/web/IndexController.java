@@ -1,6 +1,5 @@
 package com.eunyeong.book.springboot.web;
 
-import com.eunyeong.book.springboot.config.auth.dto.SessionUser;
 import com.eunyeong.book.springboot.domain.posts.PostsRepository;
 import com.eunyeong.book.springboot.service.posts.PostsService;
 import com.eunyeong.book.springboot.web.dto.PostsListResponseDto;
@@ -24,16 +23,6 @@ public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
 
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("posts", postsService.findAllDesc());
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        if(user != null){
-            model.addAttribute("userName", user.getName());
-        }
-        return "index";
-    }
 
     @GetMapping("/posts/save")
     public String postsSave() {

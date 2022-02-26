@@ -5,17 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@Table(name="User")
 public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,17 +29,21 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
+    @Column(name = "token", columnDefinition = "TEXT")
+    private String token;
+
     @Builder
-    public User(String name, String email, String picture, Role role){
+    public User(String name, String email, String picture, Role role, String token){
         this.name=name;
         this.email=email;
         this.picture=picture;
         this.role=role;
+        this.token=token;
     }
 
     public User update(String name, String picture){
         this.name = name;
-        this.picture = picture;
+        this.picture= picture;
 
         return this;
     }

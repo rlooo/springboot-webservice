@@ -14,15 +14,20 @@ public class Posts extends BaseTimeEntity {
 
     @Id // 해당 테이블의 PK 필드
     @GeneratedValue(strategy = GenerationType.IDENTITY) //pK 생성 규칙을 나타냄.
+    //@Field("id")
     // GenerationType.IDENTITY 옵션: auto_increment
     private Long id;
 
     @Column(length = 500, nullable = false)
+    //@Field("title")
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
+    //@Field("content")
     private String content;
 
+    @Column
+    //@Field("author")
     private String author;
 
     @Builder
