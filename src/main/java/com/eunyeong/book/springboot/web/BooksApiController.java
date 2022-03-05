@@ -3,6 +3,7 @@ package com.eunyeong.book.springboot.web;
 import com.eunyeong.book.springboot.service.books.BooksService;
 import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
 import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,4 @@ public class BooksApiController {
         map.put("bookList", booksService.searchBooks(keyword));
         return map;
     }
-
-
 }
