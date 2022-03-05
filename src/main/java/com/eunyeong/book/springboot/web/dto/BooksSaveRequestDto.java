@@ -2,7 +2,7 @@ package com.eunyeong.book.springboot.web.dto;
 
 import com.eunyeong.book.springboot.domain.books.Books;
 import com.eunyeong.book.springboot.domain.books.CollectInfo;
-import com.eunyeong.book.springboot.domain.posts.Posts;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

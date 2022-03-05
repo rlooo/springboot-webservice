@@ -1,6 +1,5 @@
 package com.eunyeong.book.springboot.domain.books;
 
-import com.eunyeong.book.springboot.domain.posts.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
