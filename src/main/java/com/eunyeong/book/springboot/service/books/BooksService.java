@@ -1,12 +1,10 @@
 package com.eunyeong.book.springboot.service.books;
 
 import com.eunyeong.book.springboot.domain.books.BooksRepository;
-import com.eunyeong.book.springboot.domain.books.CollectInfo;
 import com.eunyeong.book.springboot.domain.books.CollectInfoRepository;
 import com.eunyeong.book.springboot.web.dto.BooksListResponseDto;
 import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
 import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
-import com.eunyeong.book.springboot.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

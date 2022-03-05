@@ -3,7 +3,6 @@ package com.eunyeong.book.springboot.web;
 import com.eunyeong.book.springboot.service.books.BooksService;
 import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
 import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
-import com.eunyeong.book.springboot.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

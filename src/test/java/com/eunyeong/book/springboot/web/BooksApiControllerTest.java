@@ -4,29 +4,20 @@ import com.eunyeong.book.springboot.domain.books.Books;
 import com.eunyeong.book.springboot.domain.books.BooksRepository;
 import com.eunyeong.book.springboot.domain.books.CollectInfo;
 import com.eunyeong.book.springboot.domain.books.CollectInfoRepository;
-import com.eunyeong.book.springboot.domain.posts.Posts;
-import com.eunyeong.book.springboot.domain.posts.PostsRepository;
 import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
 import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
-import com.eunyeong.book.springboot.web.dto.PostsSaveRequestDto;
-import com.eunyeong.book.springboot.web.dto.PostsUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 //import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -71,6 +62,7 @@ public class BooksApiControllerTest {
     @After
     public void tearDown() throws Exception {
         booksRepository.deleteAll();
+        collectInfoRepository.deleteAll();
     }
 
     @Test
@@ -108,42 +100,42 @@ public class BooksApiControllerTest {
 
     }
 
-//    @Test
-//    //@WithMockUser(roles = "USER")
-//    public void CollectInfo_등록된다() throws Exception {
-//        Books book = new Books("test", "test", "test", "test", "test", "test", "test");
-//        booksRepository.save(book);
-//
-//        String collectLocation = "과학도서관/Sci-Info(1층서고)";
-//        String callNumber = "006.78.2019z2";
-//        String enrollNum = "121251508";
-//        Integer state = 0; // 대출중:0 대출가능:1
-//        LocalDate returnDate = LocalDate.of(2021, 8, 17);
-//        Integer reserveState = 1; // 예약 불가능:0 예약 가능:1
-//
-//        CollectInfoSaveRequestDto requestCollectInfoDto = CollectInfoSaveRequestDto.builder()
-//                .book(book)
-//                .collectLocation(collectLocation)
-//                .callNumber(callNumber)
-//                .enrollNum(enrollNum)
-//                .state(state)
-//                .returnDate(returnDate)
-//                .reserveState(reserveState)
-//                .build();
-//
-//        String url = "http://localhost:" + port + "/collectinfo/save";
-//
-//        //when
-//        mvc.perform(post(url)
-//                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-//                        .content(new ObjectMapper().writeValueAsString(requestCollectInfoDto)))
-//                .andExpect(status().isOk());
-//
-//        //then
-//        List<CollectInfo> all = collectInfoRepository.findAll();
-//        assertThat(all.get(0).getBook()).isEqualTo(book);
-//        assertThat(all.get(0).getCollectLocation()).isEqualTo(collectLocation);
-//    }
+    @Test
+    //@WithMockUser(roles = "USER")
+    public void CollectInfo_등록된다() throws Exception {
+        Books book = new Books("test", "test", "test", "test", "test", "test", "test");
+        booksRepository.save(book);
+
+        String collectLocation = "과학도서관/Sci-Info(1층서고)";
+        String callNumber = "006.78.2019z2";
+        String enrollNum = "121251508";
+        Integer state = 0; // 대출중:0 대출가능:1
+        LocalDate returnDate = LocalDate.of(2021, 8, 17);
+        Integer reserveState = 1; // 예약 불가능:0 예약 가능:1
+
+        CollectInfoSaveRequestDto requestCollectInfoDto = CollectInfoSaveRequestDto.builder()
+                .book(book)
+                .collectLocation(collectLocation)
+                .callNumber(callNumber)
+                .enrollNum(enrollNum)
+                .state(state)
+                .returnDate(returnDate)
+                .reserveState(reserveState)
+                .build();
+
+        String url = "http://localhost:" + port + "/collectinfo/save";
+
+        //when
+        mvc.perform(post(url)
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .content(new ObjectMapper().writeValueAsString(requestCollectInfoDto)))
+                .andExpect(status().isOk());
+
+        //then
+        List<CollectInfo> all = collectInfoRepository.findAll();
+        assertThat(all.get(0).getBook()).isEqualTo(book);
+        assertThat(all.get(0).getCollectLocation()).isEqualTo(collectLocation);
+    }
 
     //상세 조회
     @Test
