@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
+
 }
 
 apply plugin: 'java'
@@ -34,17 +35,17 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web') // 버전 명시 x
     compile('org.projectlombok:lombok')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-mustache')
+    //compile('org.springframework.boot:spring-boot-starter-mustache')
     //compile('com.h2database:h2')
 
     //compile('org.springframework.boot:spring-boot-starter-tomcat')
     compile ('mysql:mysql-connector-java')
 
-    compile('org.springframework.boot:spring-boot-starter-oauth2-client')
-    compile('org.springframework.session:spring-session-jdbc')
+    //compile('org.springframework.boot:spring-boot-starter-oauth2-client')
+    //compile('org.springframework.session:spring-session-jdbc')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile("org.springframework.security:spring-security-test")
+    //testCompile("org.springframework.security:spring-security-test")
     testCompile('org.assertj:assertj-core:3.22.0')
 
 
@@ -53,8 +54,6 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-
 
 
 

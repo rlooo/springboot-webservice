@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
-import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -35,7 +35,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+//import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -64,7 +64,7 @@ public class BooksApiControllerTest {
     public void setup() {
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
-                .apply(springSecurity())
+                //.apply(springSecurity())
                 .build();
     }
 
@@ -74,7 +74,7 @@ public class BooksApiControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = "USER")
+    //@WithMockUser(roles = "USER")
     public void Books_등록된다() throws Exception {
         String title = "test";
         String thumbnail = "test";
@@ -108,46 +108,46 @@ public class BooksApiControllerTest {
 
     }
 
-    @Test
-    @WithMockUser(roles = "USER")
-    public void CollectInfo_등록된다() throws Exception {
-        Books book = new Books("test", "test", "test", "test", "test", "test", "test");
-        booksRepository.save(book);
-
-        String collectLocation = "과학도서관/Sci-Info(1층서고)";
-        String callNumber = "006.78.2019z2";
-        String enrollNum = "121251508";
-        Integer state = 0; // 대출중:0 대출가능:1
-        LocalDate returnDate = LocalDate.of(2021, 8, 17);
-        Integer reserveState = 1; // 예약 불가능:0 예약 가능:1
-
-        CollectInfoSaveRequestDto requestCollectInfoDto = CollectInfoSaveRequestDto.builder()
-                .book(book)
-                .collectLocation(collectLocation)
-                .callNumber(callNumber)
-                .enrollNum(enrollNum)
-                .state(state)
-                .returnDate(returnDate)
-                .reserveState(reserveState)
-                .build();
-
-        String url = "http://localhost:" + port + "/collectinfo/save";
-
-        //when
-        mvc.perform(post(url)
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(new ObjectMapper().writeValueAsString(requestCollectInfoDto)))
-                .andExpect(status().isOk());
-
-        //then
-        List<CollectInfo> all = collectInfoRepository.findAll();
-        assertThat(all.get(0).getBook()).isEqualTo(book);
-        assertThat(all.get(0).getCollectLocation()).isEqualTo(collectLocation);
-    }
+//    @Test
+//    //@WithMockUser(roles = "USER")
+//    public void CollectInfo_등록된다() throws Exception {
+//        Books book = new Books("test", "test", "test", "test", "test", "test", "test");
+//        booksRepository.save(book);
+//
+//        String collectLocation = "과학도서관/Sci-Info(1층서고)";
+//        String callNumber = "006.78.2019z2";
+//        String enrollNum = "121251508";
+//        Integer state = 0; // 대출중:0 대출가능:1
+//        LocalDate returnDate = LocalDate.of(2021, 8, 17);
+//        Integer reserveState = 1; // 예약 불가능:0 예약 가능:1
+//
+//        CollectInfoSaveRequestDto requestCollectInfoDto = CollectInfoSaveRequestDto.builder()
+//                .book(book)
+//                .collectLocation(collectLocation)
+//                .callNumber(callNumber)
+//                .enrollNum(enrollNum)
+//                .state(state)
+//                .returnDate(returnDate)
+//                .reserveState(reserveState)
+//                .build();
+//
+//        String url = "http://localhost:" + port + "/collectinfo/save";
+//
+//        //when
+//        mvc.perform(post(url)
+//                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+//                        .content(new ObjectMapper().writeValueAsString(requestCollectInfoDto)))
+//                .andExpect(status().isOk());
+//
+//        //then
+//        List<CollectInfo> all = collectInfoRepository.findAll();
+//        assertThat(all.get(0).getBook()).isEqualTo(book);
+//        assertThat(all.get(0).getCollectLocation()).isEqualTo(collectLocation);
+//    }
 
     //상세 조회
     @Test
-    @WithMockUser(roles = "USER")
+    //@WithMockUser(roles = "USER")
     public void Book_조회() throws Exception {
         // Test를 위해서 Book에 해당하는 db 2개 저장
         String title1 = "test";
@@ -195,9 +195,10 @@ public class BooksApiControllerTest {
         List<Books> all = booksRepository.findAll();
         assertThat(all.size()).isEqualTo(2);
     }
+
     // 조회
     @Test
-    @WithMockUser(roles = "USER")
+   // @WithMockUser(roles = "USER")
     public void Book_조회2() throws Exception{
         // Test를 위해서 Book에 해당하는 db 2개 저장
         String title1 = "test";
