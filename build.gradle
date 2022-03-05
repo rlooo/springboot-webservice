@@ -18,7 +18,7 @@ apply plugin: 'io.spring.dependency-management' // 스프링 부트의 의존성
 
 group 'org.eunyeong.book'
 version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
-sourceCompatibility = 1.8
+sourceCompatibility = '1.8'
 
 repositories { // 각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지 정함
     mavenCentral()
