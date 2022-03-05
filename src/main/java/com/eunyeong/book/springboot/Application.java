@@ -1,11 +1,12 @@
 package com.eunyeong.book.springboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 // Application: 앞으로 만들 프로젝트의 메인 클래스
 @EnableJpaAuditing //JPA Auditing 활성화
-@SpringBootApplication // 스프링 부트의 자동 설정, 스프링 Bean 읽기와 생성 자동 설정
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class) // 스프링 시큐리티 기능 일시 제거
 public class Application {
     public static void main(String[] args){
         SpringApplication.run(Application.class, args); // 내장 WAS 실행
