@@ -5,12 +5,14 @@ import com.eunyeong.book.springboot.domain.books.CollectInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class CollectInfoSaveRequestDto {
     private Books book;

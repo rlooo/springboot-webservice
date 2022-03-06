@@ -1,11 +1,13 @@
 package com.eunyeong.book.springboot.service.books;
 
+import com.eunyeong.book.springboot.domain.books.Books;
 import com.eunyeong.book.springboot.domain.books.BooksRepository;
 import com.eunyeong.book.springboot.domain.books.CollectInfoRepository;
 import com.eunyeong.book.springboot.web.dto.BooksListResponseDto;
 import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
 import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +17,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class BooksService {
+    @Autowired
     private final BooksRepository booksRepository;
+    @Autowired
     private final CollectInfoRepository collectInfoRepository;
 
     @Transactional
@@ -32,5 +36,12 @@ public class BooksService {
                 .map(BooksListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public Books searchBooks2(Long book_id) {
+        return collectInfoRepository.findBookByid(book_id);
+    }
+
+
 
 }

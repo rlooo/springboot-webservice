@@ -8,4 +8,7 @@ import java.util.List;
 public interface CollectInfoRepository extends JpaRepository<CollectInfo, Long> {
     @Query("SELECT p FROM CollectInfo p ORDER BY p.seq DESC")
     List<CollectInfo> findAllDesc();
+
+    @Query("SELECT p FROM Books p WHERE p.id=book_id")
+    Books findBookByid(Long book_id);
 }

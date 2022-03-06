@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="freelec-springboot2-webservice:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.eunyeong.book" external.system.module.type="sourceSet" external.system.module.version="1.0.4-SNAPSHOT-20220305155109" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="freelec-springboot2-webservice:test" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="org.eunyeong.book" external.system.module.type="sourceSet" external.system.module.version="1.0.4-SNAPSHOT-20220306184009" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager">
     <output-test url="file://$MODULE_DIR$/../../build/classes/java/test" />
     <exclude-output />
@@ -13,7 +13,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.projectlombok:lombok:1.18.8" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-data-jpa:2.1.8.RELEASE" level="project" />
-    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:8.0.17" level="project" />
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:8.0.20" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.session:spring-session-jdbc:2.1.8.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.testng:testng:7.5" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-test:2.1.8.RELEASE" level="project" />

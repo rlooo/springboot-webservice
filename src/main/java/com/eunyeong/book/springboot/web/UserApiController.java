@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @RequiredArgsConstructor
 @RestController
 public class UserApiController {
@@ -28,9 +29,18 @@ public class UserApiController {
 //        return userInfo;
 //    }
 
-    @CrossOrigin("http://localhost:8080")
-    @PostMapping(value = "/auth/google/user", consumes = "application/json")
-    public Long save(@RequestBody UserDto userDto) {
-        return userService.save(userDto);
+//    @CrossOrigin("http://localhost:8080")
+//    @PostMapping(value = "/auth/google/user", consumes = "application/json")
+//    public Long save(@RequestBody UserDto userDto) {
+//        return userService.save(userDto);
+//    }
+
+    @PostMapping("/auth/google/user/")
+    @ResponseBody
+    public Object userInformation(@RequestBody UserDto userDto){
+        userService.save(userDto);
+        UserDto user = new UserDto(userDto.getName(), userDto.getEmail(), userDto.getPicture(), userDto.getAccessToken());
+
+        return user;
     }
 }

@@ -4,6 +4,7 @@ import com.eunyeong.book.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -25,20 +26,20 @@ public class User extends BaseTimeEntity {
     @Column
     private String picture;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    @Column(nullable = false)
+//    private Role role;
 
-    @Column(name = "token", columnDefinition = "TEXT")
-    private String token;
+    @Column(name = "accessToken", columnDefinition = "TEXT")
+    private String accessToken;
 
     @Builder
-    public User(String name, String email, String picture, Role role, String token){
+    public User(String name, String email, String picture, String accessToken){
         this.name=name;
         this.email=email;
         this.picture=picture;
-        this.role=role;
-        this.token=token;
+//        this.role=role;
+        this.accessToken=accessToken;
     }
 
     public User update(String name, String picture){
@@ -48,8 +49,10 @@ public class User extends BaseTimeEntity {
         return this;
     }
 
-    public String getRoleKey() {
-        return this.role.getKey();
-    }
+//    public String getRoleKey() {
+//        return this.role.getKey();
+//    }
+
 }
+
 
