@@ -23,12 +23,12 @@ public class BooksService {
     private final CollectInfoRepository collectInfoRepository;
 
     @Transactional
-    public Long save(BooksSaveRequestDto requestDto) {
+    public Long saveBooks(BooksSaveRequestDto requestDto) {
         return booksRepository.save(requestDto.toEntity()).getId();
     }
 
     @Transactional
-    public Long save(CollectInfoSaveRequestDto collectInfoSaveRequestDto) { return collectInfoRepository.save(collectInfoSaveRequestDto.toEntity()).getSeq();}
+    public Long saveCollectInfo(CollectInfoSaveRequestDto collectInfoSaveRequestDto) { return collectInfoRepository.save(collectInfoSaveRequestDto.toEntity()).getSeq();}
 
     @Transactional
     public List<BooksListResponseDto> searchBooks(String keyword) {
