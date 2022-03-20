@@ -2,6 +2,8 @@ package com.eunyeong.book.springboot.web.dto;
 
 import com.eunyeong.book.springboot.domain.books.Books;
 import com.eunyeong.book.springboot.domain.books.CollectInfo;
+import com.eunyeong.book.springboot.domain.books.Category;
+import com.eunyeong.book.springboot.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +16,11 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class CollectInfoSaveRequestDto {
+    private LocalDate loanDate;
+    private User user;
+    private Integer extensionCount;
     private Books book;
-    private String collectLocation;
+    private Category collectLocation;
     private String callNumber;
     private String enrollNum;
     private Integer state;
@@ -24,7 +29,7 @@ public class CollectInfoSaveRequestDto {
 
 
     @Builder
-    public CollectInfoSaveRequestDto(Books book, String collectLocation, String callNumber, String enrollNum, Integer state, LocalDate returnDate, Integer reserveState) {
+    public CollectInfoSaveRequestDto(Books book, Category collectLocation, String callNumber, String enrollNum, Integer state, LocalDate returnDate, LocalDate loanDate, Integer extensionCount, Integer reserveState,User user) {
         this.book = book;
         this.collectLocation = collectLocation;
         this.callNumber = callNumber;
@@ -32,6 +37,9 @@ public class CollectInfoSaveRequestDto {
         this.state = state;
         this.returnDate = returnDate;
         this.reserveState = reserveState;
+        this.loanDate=loanDate;
+        this.extensionCount=extensionCount;
+        this.user=user;
     }
 
     @NotNull
@@ -44,6 +52,9 @@ public class CollectInfoSaveRequestDto {
                 .state(state)
                 .returnDate(returnDate)
                 .reserveState(reserveState)
+                .loanDate(loanDate)
+                .extensionCount(extensionCount)
+                .user(user)
                 .build();
     }
 }

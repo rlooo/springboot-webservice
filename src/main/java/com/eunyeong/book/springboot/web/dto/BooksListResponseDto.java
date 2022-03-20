@@ -1,8 +1,11 @@
 package com.eunyeong.book.springboot.web.dto;
 
 import com.eunyeong.book.springboot.domain.books.Books;
+import com.eunyeong.book.springboot.domain.books.CollectInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -15,6 +18,7 @@ public class BooksListResponseDto {
     private String sign;
     private String publish;
     private String shape;
+    private List<CollectInfo> collectInfoList;
 
     public BooksListResponseDto(Books entity) {
         this.id = entity.getId();
@@ -25,5 +29,7 @@ public class BooksListResponseDto {
         this.sign = entity.getSign();
         this.publish = entity.getPublish();
         this.shape = entity.getShape();
+        this.collectInfoList = entity.getCollectInfoList();
+
     }
 }

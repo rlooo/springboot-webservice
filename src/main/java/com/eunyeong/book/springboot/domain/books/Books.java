@@ -1,11 +1,15 @@
 package com.eunyeong.book.springboot.domain.books;
 
 import com.eunyeong.book.springboot.domain.BaseTimeEntity;
+import com.eunyeong.book.springboot.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -38,8 +42,12 @@ public class Books extends BaseTimeEntity {
     @Column
     private String shape;
 
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "book", orphanRemoval = true)
+    private List<CollectInfo> collectInfoList = new ArrayList<>();
+
     @Builder
-    public Books(String title, String thumbnail, String type, String author, String sign, String publish, String shape){
+    public Books(String title, String thumbnail, String type, String author, String sign, String publish, String shape, List<CollectInfo> collectInfoList){
         this.title = title;
         this.thumbnail = thumbnail;
         this.type = type;
@@ -47,6 +55,7 @@ public class Books extends BaseTimeEntity {
         this.sign = sign;
         this.publish = publish;
         this.shape = shape;
+        this.collectInfoList = collectInfoList;
     }
 
     public void update(String title, String thumbnail, String type, String author, String sign, String publish, String shape){

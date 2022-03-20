@@ -1,10 +1,13 @@
 package com.eunyeong.book.springboot.web;
 
 import com.eunyeong.book.springboot.domain.books.Books;
+import com.eunyeong.book.springboot.domain.books.Category;
+import com.eunyeong.book.springboot.domain.books.CategoryRepository;
+import com.eunyeong.book.springboot.domain.books.CollectInfo;
+import com.eunyeong.book.springboot.domain.user.User;
 import com.eunyeong.book.springboot.service.books.BooksService;
-import com.eunyeong.book.springboot.web.dto.BooksSaveRequestDto;
-import com.eunyeong.book.springboot.web.dto.CollectInfoResponseDto;
-import com.eunyeong.book.springboot.web.dto.CollectInfoSaveRequestDto;
+import com.eunyeong.book.springboot.service.user.UserService;
+import com.eunyeong.book.springboot.web.dto.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,8 +15,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,6 +27,8 @@ public class BooksApiController {
 
     @Autowired
     private final BooksService booksService;
+    private final UserService userService;
+    private final CategoryRepository categoryRepository;
 
     @PostMapping("/books/save")
     @ResponseBody
@@ -30,11 +38,17 @@ public class BooksApiController {
 
     @PostMapping("/collectinfo/save")
     @ResponseBody
-    public Long collectInfoSave(@RequestBody CollectInfoResponseDto collectInfoResponseDto) {
-        Books book=booksService.searchBooks2(collectInfoResponseDto.getBook());
+    public Long collectInfoSave(@RequestBody CollectInfoListResponseDto collectInfoListResponseDto) {
+        Books book=booksService.findBooks(collectInfoListResponseDto.getBook());
+        Category collectLocation = booksService.findCategory(collectInfoListResponseDto.getCollectLocation());
+
         CollectInfoSaveRequestDto collectInfoSaveRequestDto = new CollectInfoSaveRequestDto();
+
         collectInfoSaveRequestDto.setBook(book);
-        BeanUtils.copyProperties(collectInfoResponseDto, collectInfoSaveRequestDto); // 주입된 Bean을 또다른 객체의 Bean으로 복사시 사용
+        collectInfoSaveRequestDto.setCollectLocation(collectLocation);
+
+        BeanUtils.copyProperties(collectInfoListResponseDto, collectInfoSaveRequestDto); // 주입된 Bean을 또다른 객체의 Bean으로 복사시 사용
+
         return booksService.saveCollectInfo(collectInfoSaveRequestDto);
     }
 
@@ -50,7 +64,51 @@ public class BooksApiController {
         return map;
     }
 
+    @PutMapping("/book/loan")
+    @ResponseBody
+    public void loan(@RequestBody HashMap<String, Long> param){
+        Long seq=param.get("seq");
+        CollectInfo collectInfo=booksService.findCollectInfo(seq);
 
+        Long user_id=param.get("user_id");
+        User user = userService.findUser(user_id);
+
+        CollectInfoUpdateRequestDto requestDto = new CollectInfoUpdateRequestDto() ;
+        BeanUtils.copyProperties(collectInfo, requestDto);
+
+        requestDto.setState(0);
+        requestDto.setUser(user); //빌린 사람
+        requestDto.setLoanDate(LocalDate.now());//대출날짜 // 컴퓨터의 현재 날짜 정보 2018-07-26
+        requestDto.setReturnDate(LocalDate.now().plusDays(14)); // 반납일 2주 뒤
+        requestDto.setExtensionCount(0);//연장횟수
+        //reserveState는 수정 필요
+
+        booksService.update(seq, requestDto);
+    }
+
+    @GetMapping("/book/loan/status")
+    @ResponseBody
+    public Map<String, Object> loan_status(@RequestBody HashMap<String, Long> param){
+        Long user_id=param.get("user_id");
+        User user=userService.findUser(user_id);
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("loanStatus", booksService.loanStatus(user));
+        return map;
+    }
+
+    @GetMapping("/book/category")
+    @ResponseBody
+    public Map<String, Object> categoryList(){
+        List<Category> categoryList = categoryRepository.findAll();
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("categoryList", categoryList.stream().collect(Collectors.toMap(Category::getId, Category::getCollectLocation)));
+
+        return map;
+    }
 
 }
 
