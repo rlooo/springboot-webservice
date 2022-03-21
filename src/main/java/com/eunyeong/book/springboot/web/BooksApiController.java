@@ -30,12 +30,18 @@ public class BooksApiController {
     private final UserService userService;
     private final CategoryRepository categoryRepository;
 
+    /**
+     * books 저장
+     */
     @PostMapping("/books/save")
     @ResponseBody
     public void booksSave(@RequestBody BooksSaveRequestDto bookRequestDto){
         booksService.saveBooks(bookRequestDto);
     }
 
+    /**
+     * collectInfo 저장
+     */
     @PostMapping("/collectinfo/save")
     @ResponseBody
     public Long collectInfoSave(@RequestBody CollectInfoListResponseDto collectInfoListResponseDto) {
@@ -52,6 +58,9 @@ public class BooksApiController {
         return booksService.saveCollectInfo(collectInfoSaveRequestDto);
     }
 
+    /**
+     * 도서 검색
+     */
     @GetMapping("/book/search")
     @ResponseBody
     public Map<String, Object> search(@RequestBody HashMap<String, Object> param) {
@@ -64,6 +73,9 @@ public class BooksApiController {
         return map;
     }
 
+    /**
+     * 대출 기능
+     */
     @PutMapping("/book/loan")
     @ResponseBody
     public void loan(@RequestBody HashMap<String, Long> param){
@@ -86,6 +98,9 @@ public class BooksApiController {
         booksService.update(seq, requestDto);
     }
 
+    /**
+     * 대출현황 리스트 조회
+     */
     @GetMapping("/book/loan/status")
     @ResponseBody
     public Map<String, Object> loan_status(@RequestBody HashMap<String, Long> param){
@@ -98,6 +113,9 @@ public class BooksApiController {
         return map;
     }
 
+    /**
+     * 카테고리(collectLocation) 리스트 조회
+     */
     @GetMapping("/book/category")
     @ResponseBody
     public Map<String, Object> categoryList(){

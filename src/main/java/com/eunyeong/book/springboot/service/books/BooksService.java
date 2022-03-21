@@ -26,6 +26,9 @@ public class BooksService {
     @Transactional
     public Long saveCollectInfo(CollectInfoSaveRequestDto collectInfoSaveRequestDto) { return collectInfoRepository.save(collectInfoSaveRequestDto.toEntity()).getSeq();}
 
+    /**
+     * 도서 검색
+     */
     @Transactional
     public List<BooksListResponseDto> searchBooks(String keyword) {
         return booksRepository.findByTitleContaining(keyword).stream()
@@ -38,8 +41,10 @@ public class BooksService {
         return collectInfoRepository.findBookByid(book_id);
     }
 
+
     @Transactional
     public CollectInfo findCollectInfo(Long seq){return collectInfoRepository.findCollectInfoBySeq(seq);}
+
 
     @Transactional
     public Category findCategory(Long id) {return categoryRepository.findCategoryInfoById(id);}
